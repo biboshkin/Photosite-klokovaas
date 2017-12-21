@@ -1,1 +1,6 @@
-node_modules/
+/coverage
+/node_modules
+/public/build
+npm-debug.log
+/public/images
+/src/images/
