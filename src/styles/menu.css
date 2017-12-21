@@ -44,7 +44,8 @@ a {
 
 .menu-title {
 	font-family: "Neucha";
-	font-size: 24px;
+	font-size: 32px;
+	text-align: left;
 }
 
 .menu-title__icon {
@@ -53,11 +54,18 @@ a {
 	padding-right: 10px;
 }
 
+.menu-social__phone {
+	font-family: "Neucha";
+	font-size: 24px;
+	padding-left: 10px;
+}
+
 .menu-container {
 	height: 100%;
 	width: 80%;
 	margin: 0 auto;
 }
+
 .main-menu {
 	min-height: 100%;
 	margin-bottom: -80px;
