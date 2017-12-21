@@ -22,6 +22,11 @@
   margin: 25px auto;
   width: 250px;
 }
+
+.mobile-link {
+  padding-right: 10px;
+}
+
 #menuToggle
 {
   display: block;

@@ -11,17 +11,35 @@ export default ({}) => (
 	    <span></span>
 	    <ul id="menu">
 	    	<div className="mobile-logo">
-				<Link to="/">
-				 	<img src="http://i.imgur.com/WImWcSf.png" />
-				</Link>
-				<h1 className="hide">Jamille Queiroz Fotografia</h1> 
-			</div> 
-	      	<p><Link to="gallery/vao/23">Vão de Almas</Link></p>
-			<p><Link to="gallery/nath/32">PARAL.ELOS</Link></p>
-			<p><Link to="gallery/indios/27">ENCONTRO DE CULTURAS</Link></p>
-			<p><Link to="about">Sobre</Link></p>
-			<p><Link to="contact">Contato</Link></p>
+					<Link to="/">
+						<i className="fa fa-camera fa-lg"></i>
+						<p>Клокова Анастасия</p>
+						<p>Фотограф</p>
+					</Link>
+					<br/>
+					<h1 className="hide">Klokova Anastasia</h1> 
+				</div> 
+				<p><Link to="gallery/photos">Примеры работ</Link></p>
+				<p><Link to="contact">Контакты</Link></p>
+				<br/>
+				<li>
+					<a className="mobile-link" href="tel:+79106174473">
+						<i className="fa fa-phone"></i>
+					</a>
+					<a className="mobile-link" href="https://vk.com/klokova_as">
+						<i className="fa fa-vk"></i>
+					</a>
+					<a className="mobile-link" href="https://www.instagram.com/klokova_as/">
+						<i className="fa fa-instagram"></i>
+					</a>
+					<a className="mobile-link" href="mailto:klokovaas@mail.ru.com">
+						<i className="fa fa-envelope-o"></i>
+					</a>
+				</li>
+				
 	    </ul>
 	  </div>
+
+		
 	</nav>
 )

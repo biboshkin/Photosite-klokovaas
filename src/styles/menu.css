@@ -36,9 +36,6 @@ a {
 	margin: 0;
 }
 
-
-
-
 .hide {
    	position: absolute !important;
    	top: -9999px !important;
@@ -46,7 +43,6 @@ a {
 }
 
 .menu-title {
-	font-family: "Neucha";
 	font-size: 24px;
 }
 

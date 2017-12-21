@@ -26,7 +26,7 @@ export default ({}) => (
 		<h1 className="hide">Contato</h1>
 		<div style={styles.pic} className="fade-bottom"></div>
 		<div style={styles.text}>
-			<p style={{fontFamily: 'Lato', color: 'rgba(0,0,0,0.9)', padding: 40}}>Disponível para ensaios e envetos na Chapada dos Veadeiros</p>
+			<p style={{fontFamily: 'Lato', color: 'rgba(0,0,0,0.9)', padding: 40}}>Вы можете написать мне на почту klokovaas@mail.ru</p>
 			<h1 style={{fontFamily: 'Lato', color: 'grey', paddingTop: 0}}><a href="mailto:jamillejqueiroz@gmail.com">jamillejqueiroz@gmail.com</a></h1>
 		</div>
 	</div>
