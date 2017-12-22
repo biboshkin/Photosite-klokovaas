@@ -20,8 +20,7 @@ export default ({}) => (
 				</div>
 			</div>
 			<div className="social">
-				<i className="fa fa-phone fa-2x"><span className="menu-social__phone">+7 (910) 905 4647</span></i>
-				
+				<i className="fa fa-phone fa-2x"><span className="menu-social__phone">+7 (910) 905 4647</span></i>				
 			</div>
 			<div className="social">	
 				<a href="https://vk.com/klokova_as">

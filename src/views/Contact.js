@@ -15,7 +15,6 @@ const styles = {
 	pic: {
 		width: '100%',
 		height: 300,
-		backgroundImage: 'url(../images/sobreecontato/contato.jpg)',
 		backgroundSize: 'cover',
 		backgroundPosition: '50% 30%',
 	}
@@ -26,8 +25,8 @@ export default ({}) => (
 		<h1 className="hide">Contato</h1>
 		<div style={styles.pic} className="fade-bottom"></div>
 		<div style={styles.text}>
-			<p style={{fontFamily: 'Lato', color: 'rgba(0,0,0,0.9)', padding: 40}}>Вы можете написать мне на почту klokovaas@mail.ru</p>
-			<h1 style={{fontFamily: 'Lato', color: 'grey', paddingTop: 0}}><a href="mailto:jamillejqueiroz@gmail.com">jamillejqueiroz@gmail.com</a></h1>
+			<p style={{fontFamily: 'Lato', color: 'rgba(0,0,0,0.9)', padding: 40}}>Вы можете написать мне на почту</p>
+			<h1 style={{fontFamily: 'Lato', color: 'grey', paddingTop: 0}}><a href="mailto:klokovaas@mail.ru">klokovaas@mail.ru</a></h1>
 		</div>
 	</div>
 )

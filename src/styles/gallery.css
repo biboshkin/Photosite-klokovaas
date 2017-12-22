@@ -9,6 +9,11 @@
 		float: right;
 	}
 }
+
+.gallery-text {
+  font-size: 20px;
+}
+
 .b-lazy {
     -webkit-transition: opacity 500ms ease-in-out;
        -moz-transition: opacity 500ms ease-in-out;

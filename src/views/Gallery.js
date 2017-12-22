@@ -15,7 +15,9 @@ export default class extends React.Component {
 		super(props)
 		this.state = {
 			lightboxIsOpen: false,
-			currentImage: 6
+			text: "",
+			thumbs: [],
+			images: []
 		}
 		this.closeLightbox = this.closeLightbox.bind(this)
 		this.openLightbox = this.openLightbox.bind(this)
@@ -23,23 +25,23 @@ export default class extends React.Component {
 		this.gotoNext = this.gotoNext.bind(this)
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	/*shouldComponentUpdate(nextProps, nextState) {
 		if (JSON.stringify(nextState.images) === JSON.stringify(this.state.images) &&
 			JSON.stringify(nextState.thumbs) === JSON.stringify(this.state.thumbs)) {
 			return false;
 		}
 		return true;
-	}
+	}*/
 
 	gotoPrevious() {
 		this.setState({
-			currentImage: this.state.currentImage -1
+			currentImage: this.state.currentImage - 1
 		})
 	}
 
 	gotoNext() {
 		this.setState({
-			currentImage: this.state.currentImage +1
+			currentImage: this.state.currentImage + 1
 		})
 	}
 
@@ -58,8 +60,9 @@ export default class extends React.Component {
 	}
 
 	render() {
-		const { title } = this.props.params
-		let text
+		const { title } = this.props.params;
+		const { text, images, thumbs, lightboxIsOpen, currentImage } = this.state;
+
 		fetch(IMAGES_URL)
 			.then((responce) => {
 				if (responce.status == "200") {
@@ -70,48 +73,46 @@ export default class extends React.Component {
 				let i;
 				let thumbs = [];
 				let images = [];
+				let text = "";
 				for(i = 0; i < 10; i++) { thumbs.push({ src: data[i].thumbnailUrl }) }
 				for(i = 0; i < 10; i++) { images.push({ src: data[i].url }) }
 			
 				
 				switch (title) {
 					case "photos":
-						text = (
-							<span>
-								<p>Здесь вы можете посмотреть примеры моих работ</p>		
-							</span>
+						text = ( 
+							<p className="gallery-text">Здесь вы можете посмотреть примеры моих работ</p> 
 						)
-						break
+						break;
 					default:
 						text = (
-							<span>
+							<div className="gallery-text">
 								<p>Ничего не нашлось...</p>
 								<p>Попробуйте ещё раз</p>	
-							</span>
+							</div>
 						)
-						break
+						break;
 				}
 				this.setState({
 					images,
-					thumbs
+					thumbs,
+					text
 				})
 			});
 
 			return (
 					<div className="gallery">
-						<div style={{width: '80%', margin: '30px auto 100px'}}>
-							<i className="fa fa-quote-left" style={{fontSize: 22, color: 'rgba(0,0,0,0.4)', position: 'relative', top: 30, right: 15}}></i>
-							{text}
-							<i className="fa fa-quote-right" style={{fontSize: 22, color: 'rgba(0,0,0,0.4)'}}></i>
+						<div style={{width: '80%', margin: '60px 10px'}}>
+							{ text }
 						</div>	
-						<Grid imagesArray={this.state.thumbs} onClick={this.openLightbox.bind(this)} columns={3} padding={3} />
+						<Grid imagesArray={thumbs} onClick={this.openLightbox.bind(this)} columns={3} padding={3} />
 						<Lightbox
-							images={this.state.images}
-							isOpen={this.state.lightboxIsOpen}
+							images={images}
+							isOpen={lightboxIsOpen}
 							onClickPrev={this.gotoPrevious}
 							onClickNext={this.gotoNext}
 							onClose={this.closeLightbox}
-							currentImage={this.state.currentImage}
+							currentImage={currentImage}
 						/>
 					</div>
 				)

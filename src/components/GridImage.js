@@ -14,7 +14,6 @@ export default class GridImage extends React.Component {
   }
 
   render() {
-    debugger
     const { src, onClick, width, padding } = this.props;
     const link = this.props.link || src;
 
@@ -38,7 +37,7 @@ export default class GridImage extends React.Component {
 
     return (
       <div onClick={onClick} className="imageGridItem" style={styles.imageGridItem}>
-          <div data-url={src} className="imageWrapper b-lazy" style={styles.imageWrapper}></div>
+          <div data-src={src} className="imageWrapper b-lazy" style={styles.imageWrapper}></div>
       </div>
     );
   }

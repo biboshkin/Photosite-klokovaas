@@ -6,7 +6,6 @@ import { Router, Route, IndexRoute, Link } from 'react-router'
 import Menu from './components/Menu'
 import MobileNav from './components/MobileNav'
 import Home from './views/Home'
-import About from './views/About'
 import Contact from './views/Contact'
 import Gallery from './views/Gallery'
 import RouteTransition from './components/RouteTransition'
@@ -31,7 +30,7 @@ class App extends React.Component {
         <MobileNav />
         <RouteTransition pathname={this.props.location.pathname} style={{visibility: 'hidden'}}>
           {this.props.children}
-        </RouteTransition>  
+        </RouteTransition>
       </div>
     )
   }
@@ -41,7 +40,6 @@ render((
   <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
     <Route path="/" component={App}>
     	<IndexRoute component={Home} />
-    	<Route path="about" component={About} />
       <Route path="contact" component={Contact} />
       <Route path="gallery/:title" component={Gallery} />
     </Route>
