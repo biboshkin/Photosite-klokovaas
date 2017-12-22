@@ -28,7 +28,8 @@
     "recompose": "^0.11.2"
   },
   "devDependencies": {
-    "nwb": "~0.20.0"
+    "nwb": "^0.20.0",
+    "webpack": "3.8.1"
   },
   "author": "",
   "license": "MIT",
