@@ -4,11 +4,11 @@ import Grid from '../components/Grid'
 import PreLoader from '../components/PreLoader'
 require('../styles/gallery.css')
 
+import { getImagesByAlbum } from '../components/FlickrHelper'
+
 const masonryOptions = {
     transitionDuration: 0
 };
-
-const IMAGES_URL = "https://jsonplaceholder.typicode.com/photos";
 
 export default class extends React.Component {
 	constructor(props){
@@ -62,59 +62,53 @@ export default class extends React.Component {
 	render() {
 		const { title } = this.props.params;
 		const { text, images, thumbs, lightboxIsOpen, currentImage } = this.state;
-
-		fetch(IMAGES_URL)
-			.then((responce) => {
-				if (responce.status == "200") {
-					return responce.json();
-				}
-			})
-			.then((data) => {
-				let i;
-				let thumbs = [];
-				let images = [];
-				let text = "";
-				for(i = 0; i < 10; i++) { thumbs.push({ src: data[i].thumbnailUrl }) }
-				for(i = 0; i < 10; i++) { images.push({ src: data[i].url }) }
+		debugger
+		const photos = getImagesByAlbum('72157663915574218');
+		if (photos) {
+			let i;
+			let thumbs = [];
+			let images = [];
+			let text = "";
+			for(i = 0; i < 10; i++) { thumbs.push({ src: data[i].thumbnailUrl }) }
+			for(i = 0; i < 10; i++) { images.push({ src: data[i].originUrl }) }
+		
 			
-				
-				switch (title) {
-					case "photos":
-						text = ( 
-							<p className="gallery-text">Здесь вы можете посмотреть примеры моих работ</p> 
-						)
-						break;
-					default:
-						text = (
-							<div className="gallery-text">
-								<p>Ничего не нашлось...</p>
-								<p>Попробуйте ещё раз</p>	
-							</div>
-						)
-						break;
-				}
-				this.setState({
-					images,
-					thumbs,
-					text
-				})
+			switch (title) {
+				case "photos":
+					text = ( 
+						<p className="gallery-text">Здесь вы можете посмотреть примеры моих работ</p> 
+					)
+					break;
+				default:
+					text = (
+						<div className="gallery-text">
+							<p>Ничего не нашлось...</p>
+							<p>Попробуйте ещё раз</p>	
+						</div>
+					)
+					break;
+			};
+			this.setState({
+				images,
+				thumbs,
+				text
 			});
-
-			return (
-					<div className="gallery">
-						<div style={{width: '80%', margin: '60px 10px'}}>
-							{ text }
-						</div>	
-						<Grid imagesArray={thumbs} onClick={this.openLightbox.bind(this)} columns={3} padding={3} />
-						<Lightbox
-							images={images}
-							isOpen={lightboxIsOpen}
-							onClickPrev={this.gotoPrevious}
-							onClickNext={this.gotoNext}
-							onClose={this.closeLightbox}
-							currentImage={currentImage}
-						/>
-					</div>
-				)
+		};
+		return (
+				<div className="gallery">
+					<div style={{width: '80%', margin: '60px 10px'}}>
+						{ text }
+					</div>	
+					<Grid imagesArray={thumbs} onClick={this.openLightbox.bind(this)} columns={3} padding={3} />
+					<Lightbox
+						images={images}
+						isOpen={lightboxIsOpen}
+						onClickPrev={this.gotoPrevious}
+						onClickNext={this.gotoNext}
+						onClose={this.closeLightbox}
+						currentImage={currentImage}
+					/>
+				</div>
+			)
 	}
 }
