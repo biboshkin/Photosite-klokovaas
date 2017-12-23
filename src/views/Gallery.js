@@ -9,6 +9,7 @@ const masonryOptions = {
 };
 
 const IMAGES_URL = "https://jsonplaceholder.typicode.com/photos";
+const flickr_url = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=ca3783111609d69139840916b7a01ad2&format=json&nojsoncallback=1&per_page=5'
 
 export default class extends React.Component {
 	constructor(props){
