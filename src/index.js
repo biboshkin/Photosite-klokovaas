@@ -10,6 +10,10 @@ import Contact from './views/Contact'
 import Gallery from './views/Gallery'
 import RouteTransition from './components/RouteTransition'
 
+import { Provider } from 'react-redux'
+import configureStore from './reducers'
+
+
 let history = createHashHistory({
   queryKey: false
 });

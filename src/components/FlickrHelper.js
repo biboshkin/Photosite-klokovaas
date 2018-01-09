@@ -11,13 +11,20 @@ const SIZES = {
     LARGE: "Large"
 }
 
-const apiKey = 'ba1ee33a82534e97b9af8da2d5740802';
+const apiKey = '057506bea3c95531af684a709fe7b4ed';
 const secret = '9e772c14348633ad';
-const userId = '139149536@N02'
+const userId = '139149536@N02';
 
-export async function getImagesByAlbum(albumId) {
+const CONSUMER_KEY = 'ba1ee33a82534e97b9af8da2d5740802';
+const CONSUMER_SECRET = '9e772c14348633ad';
+
+export function getCollectionsTree() {
+    
+}
+
+export async function getImagesByAlbum(photosetId) {
     debugger
-    let response = await fetch(getPhotos(albumId));
+    let response = await getPhotosByPhotoset(photosetId);
     let data = await response.json();
     let photos = data.map((item) => {
         let photoSizes = getPhotoSizes(item.id);
@@ -34,9 +41,38 @@ export async function getImagesByAlbum(albumId) {
     return photos;
 };
 
-export const getAlbums = () => `https://api.flickr.com/services/rest/?method=${methods.getAlbums}&api_key=${apiKey}&user_id=${userId}&format=json`;
+export const getAlbums = () => `https://api.flickr.com/services/rest/?method=${methods.getAlbums}&api_key=${CONSUMER_KEY}&user_id=${userId}&format=json`;
 
-const getPhotos = (photosetId) => `https://api.flickr.com/services/rest/?method=${methods.getPhotos}&api_key=${apiKey}&photoset_id=${photosetId}&user_id=${userId}&format=json`;
+async function getPhotosByPhotoset(photosetId) {
+    const flickr = OAuth({
+        consumer: {
+            key: CONSUMER_KEY,
+            secret: CONSUMER_SECRET
+        },
+        signature_method: 'HMAC-SHA1',
+        hash_function: function(base_string, key) {
+            return crypto.createHmac('sha1', key).update(base_string).digest('base64');
+        }
+    });
+
+    flickr.setToken({
+        key: 'xxxxx',
+        secret: 'xxxxx'
+    });
+
+    flickr.get({
+        url: 'https://api.flickr.com/services/rest/',
+        qs: {
+            method: methods.getPhotos,
+            api_key: CONSUMER_KEY,
+            photoset_id: "72157691093193604",
+            user_id: userId
+        },
+        json: true
+    }, function(err, res, photos) {
+        return photos;
+    })
+}
 
 async function getPhotoSizes (photoId) {
     const url = `https://api.flickr.com/services/rest/?method=${methods.getSizes}&api_key=${apiKey}&photo_id=${photoId}&format=json`;
@@ -51,4 +87,3 @@ async function getPhotoInfo (photoId) {
     let data = await response.json();
     return data;
 }
-    

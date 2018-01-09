@@ -2,6 +2,8 @@ import React from 'react'
 import {Link} from 'react-router'
 require('../styles/menu.css');
 
+const USER_ID = '139149536@N02';
+
 export default ({}) => (
 	<div className="menu">
 		<div className="menu-container">
@@ -15,7 +17,7 @@ export default ({}) => (
 					<h1 className="hide">Klokova Anastasia</h1> 
 				</div> 
 				<div className="itens">
-					<p><Link to="gallery/photos">Примеры работ</Link></p>
+					{}
 					<p><Link to="contact">Контакты</Link></p>
 				</div>
 			</div>
