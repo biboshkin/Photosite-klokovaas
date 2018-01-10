@@ -8,17 +8,14 @@ import { initCollections } from '../reducers/actions'
 require('../styles/menu.css');
 
 class Menu extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	componentDidMount() {
 		getCollectionsTree((responce) => responce.collections && 
 										 responce.collections.collection && 
 										 this.props.initCollections(responce.collections.collection))
 	}
 
-	render() {	
+	render() {
+		console.log('props')
 		console.log(this.props)
 		const { collections } = this.props;
 		return (
@@ -34,7 +31,7 @@ class Menu extends React.Component {
 							<h1 className="hide">Klokova Anastasia</h1> 
 						</div> 
 						<div className="collections">
-							{ 
+							{
 								collections && 
 								collections.map(item =>
 									<p>

@@ -8,13 +8,17 @@ export default class ReactRpg extends React.Component {
     const width = Math.floor(100 / columns);
     const imageNodes = imagesArray.map((arr, index) => {
       return (
-        <GridImage key={index} src={arr.src} onClick={onClick.bind(this, index)} width={width} padding={padding}/>
+        <GridImage key={ index } 
+                   src={ arr.src } 
+                   onClick={ onClick.bind(this, index) } 
+                   width={ width } 
+                   padding={ padding }/>
       );
     });
 
     return (
       <div className="imageGrid">
-        {imageNodes}
+        { imageNodes }
       </div>
     );
   }

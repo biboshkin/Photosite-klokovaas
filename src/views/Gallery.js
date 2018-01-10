@@ -3,6 +3,7 @@ import Lightbox from 'react-images'
 import Grid from '../components/Grid'
 import PreLoader from '../components/PreLoader'
 import { getImagesByAlbum } from '../utils/flickrApiHelper'
+import { connect } from 'react-redux'
 
 require('../styles/gallery.css')
 
@@ -10,15 +11,12 @@ const masonryOptions = {
     transitionDuration: 0
 };
 
-export default class extends React.Component {
-	constructor(props){
-		console.log('Gallery constructor')
-		console.log(props)
+class Gallery extends React.Component {
+	constructor(props) {
 		super(props)
 		this.state = {
-			collectionId: props.id,
+			collection: props.collections.filter(item => item.id === props.id)[0],
 			lightboxIsOpen: false,
-			text: "",
 			thumbs: [],
 			images: []
 		}
@@ -56,9 +54,10 @@ export default class extends React.Component {
 
 	render() {
 		const { title } = this.props.params;
-		const { text, images, thumbs, lightboxIsOpen, currentImage } = this.state;
-		debugger
-		const photos = getImagesByAlbum('72157663915574218');
+		console.log('state')
+		console.log(this.state)
+		const { collection, images, thumbs, lightboxIsOpen, currentImage } = this.state;
+		let photos;
 		if (photos) {
 			let i;
 			let thumbs = [];
@@ -71,7 +70,7 @@ export default class extends React.Component {
 			switch (title) {
 				case "photos":
 					text = ( 
-						<p className="gallery-text">Здесь вы можете посмотреть примеры моих работ</p> 
+						<p className="gallery-text">{ collection.description }</p> 
 					)
 					break;
 				default:
@@ -85,25 +84,36 @@ export default class extends React.Component {
 			};
 			this.setState({
 				images,
-				thumbs,
-				text
+				thumbs
 			});
 		};
 		return (
 				<div className="gallery">
 					<div style={{width: '80%', margin: '60px 10px'}}>
-						{ text }
+						{ collection && collection.description }
 					</div>	
-					<Grid imagesArray={thumbs} onClick={this.openLightbox.bind(this)} columns={3} padding={3} />
+					<Grid imagesArray={ thumbs } 
+						  onClick={ this.openLightbox.bind(this) } 
+						  columns={3} 
+						  padding={3} />
 					<Lightbox
-						images={images}
-						isOpen={lightboxIsOpen}
-						onClickPrev={this.gotoPrevious}
-						onClickNext={this.gotoNext}
-						onClose={this.closeLightbox}
-						currentImage={currentImage}
+						images={ images }
+						isOpen={ lightboxIsOpen }
+						onClickPrev={ this.gotoPrevious }
+						onClickNext={ this.gotoNext }
+						onClose={ this.closeLightbox }
+						currentImage={ currentImage }
 					/>
 				</div>
 			)
 	}
 }
+
+const mapStateToProps = (state, ownProps) => {
+	return {
+		collections: state.collections,
+		id: ownProps.routeParams.id
+	}
+}
+
+export default connect(mapStateToProps)(Gallery);
