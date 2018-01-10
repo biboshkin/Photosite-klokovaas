@@ -13,7 +13,6 @@ export default class MobileNav extends React.Component {
 		this.toogleNav = this.toogleNav.bind(this);
 	}
 	render() {
-		console.log(this.state.isNavOpen);
 		return (
 			<nav className="mobile-nav">
 				<div id="menuToggle">

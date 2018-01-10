@@ -2,9 +2,9 @@ import React from 'react'
 import Lightbox from 'react-images'
 import Grid from '../components/Grid'
 import PreLoader from '../components/PreLoader'
-require('../styles/gallery.css')
+import { getImagesByAlbum } from '../utils/flickrApiHelper'
 
-import { getImagesByAlbum } from '../components/FlickrHelper'
+require('../styles/gallery.css')
 
 const masonryOptions = {
     transitionDuration: 0
@@ -12,8 +12,11 @@ const masonryOptions = {
 
 export default class extends React.Component {
 	constructor(props){
+		console.log('Gallery constructor')
+		console.log(props)
 		super(props)
 		this.state = {
+			collectionId: props.id,
 			lightboxIsOpen: false,
 			text: "",
 			thumbs: [],
@@ -24,14 +27,6 @@ export default class extends React.Component {
 		this.gotoPrevious = this.gotoPrevious.bind(this)
 		this.gotoNext = this.gotoNext.bind(this)
 	}
-
-	/*shouldComponentUpdate(nextProps, nextState) {
-		if (JSON.stringify(nextState.images) === JSON.stringify(this.state.images) &&
-			JSON.stringify(nextState.thumbs) === JSON.stringify(this.state.thumbs)) {
-			return false;
-		}
-		return true;
-	}*/
 
 	gotoPrevious() {
 		this.setState({

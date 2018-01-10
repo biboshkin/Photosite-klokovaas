@@ -11,12 +11,14 @@ import Gallery from './views/Gallery'
 import RouteTransition from './components/RouteTransition'
 
 import { Provider } from 'react-redux'
-import configureStore from './reducers'
+import configureStore from './reducers/configureStore'
 
 
 let history = createHashHistory({
   queryKey: false
 });
+
+const store = configureStore();
 
 class App extends React.Component {
 
@@ -41,11 +43,13 @@ class App extends React.Component {
 }
 
 render((
-  <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
-    <Route path="/" component={App}>
-    	<IndexRoute component={Home} />
-      <Route path="contact" component={Contact} />
-      <Route path="gallery/:title" component={Gallery} />
-    </Route>
-  </Router>
+  <Provider store={ store }>
+    <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Home} />
+        <Route path="contact" component={Contact} />
+        <Route path="gallery/:id" component={Gallery} />
+      </Route>
+    </Router>
+  </Provider>
 ), document.getElementById('app'))

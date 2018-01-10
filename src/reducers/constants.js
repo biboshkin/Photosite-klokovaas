@@ -1,0 +1,5 @@
+export const SELECT_COLLECTION = 'SELECT_COLLECTION';
+
+export const INIT_COLLECTIONS = 'INIT_COLLECTIONS';
+
+export const SELECT_SET = 'SELECT_SET';

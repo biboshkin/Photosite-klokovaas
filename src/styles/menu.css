@@ -83,20 +83,9 @@ a {
 .logo img {
 	max-width: 100%;
 }
-.itens {
+.collections {
 	text-transform: uppercase;
 	padding-left: 30px;
-}
-.itens img {
-	height: 15px;
-	margin-left: 10px;
-	opacity: 0;
-	-webkit-transition: opacity .35s ease-in-out;
-    -moz-transition: opacity .35s ease-in-out;
-    -ms-transition: opacity .35s ease-in-out;
-    -o-transition: opacity .35s ease-in-out;
-    transition: opacity .35s ease-in-out;
-
 }
 .itens a:hover {
 	opacity: 0.6;
