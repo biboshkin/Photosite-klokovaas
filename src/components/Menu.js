@@ -15,8 +15,6 @@ class Menu extends React.Component {
 	}
 
 	render() {
-		console.log('props')
-		console.log(this.props)
 		const { collections } = this.props;
 		return (
 			<div className="menu">
@@ -33,10 +31,11 @@ class Menu extends React.Component {
 						<div className="collections">
 							{
 								collections && 
-								collections.map(item =>
-									<p>
-										<Link to={ `gallery/${item.id}` }>
-											{ item.title }
+								collections.map((item, index) =>
+									<p key={ index }>
+										<Link 
+											  to={ `collections/${item.id}` }>
+											  { item.title }
 										</Link>
 									</p>
 								)
