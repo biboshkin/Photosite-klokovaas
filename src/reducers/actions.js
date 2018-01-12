@@ -1,9 +1,9 @@
-import { SELECT_COLLECTION, INIT_COLLECTIONS } from './constants'
+import { SAVE_ALBUMS, INIT_COLLECTIONS } from './constants'
 
-export const selectCollection = ( collectionId ) => {
+export const saveAlbums = ( albums ) => {
     return {
-        type: SELECT_COLLECTION,
-        value: collectionId
+        type: SAVE_ALBUMS,
+        value: albums
     }
 }
 

@@ -1,10 +1,14 @@
 import React from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getCollectionsTree } from '../utils/flickrApiHelper'
+import { initCollections } from '../reducers/actions'
 require('../styles/mobilemenu.css')
 
 let isNavOpen = false;
 
-export default class MobileNav extends React.Component {
+class MobileNav extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -12,7 +16,15 @@ export default class MobileNav extends React.Component {
 		};
 		this.toogleNav = this.toogleNav.bind(this);
 	}
+
+	componentDidMount() {
+		getCollectionsTree((responce) => responce.collections && 
+										 responce.collections.collection && 
+										 this.props.initCollections(responce.collections.collection))
+	}
+
 	render() {
+		const { collections } = this.props;
 		return (
 			<nav className="mobile-nav">
 				<div id="menuToggle">
@@ -31,9 +43,19 @@ export default class MobileNav extends React.Component {
 							</Link>
 						</li>
 						<li>
-							<p className="mobile-tabs" onClick={ this.toogleNav }>
-								<Link to="gallery/photos">Примеры работ</Link>
-							</p>
+							{
+								collections && 
+								collections.map((item, index) =>
+									<p>
+										<Link key={ index }
+											  className="mobile-tabs"
+											  onClick={ this.toogleNav }
+											  to={ `collections/${item.id}` }>
+											  { item.title }
+										</Link>
+									</p>
+								)
+							}
 							<p className="mobile-tabs" onClick={ this.toogleNav }>
 								<Link to="contact">Контакты</Link>
 							</p>
@@ -68,3 +90,21 @@ export default class MobileNav extends React.Component {
 		})
 	}
 }
+
+MobileNav.propTypes = {
+	collections: React.PropTypes.array
+}
+
+function mapStateToProps(state) {
+	return {
+		collections: state.collections
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		initCollections: bindActionCreators(initCollections, dispatch)
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobileNav)

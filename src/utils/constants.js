@@ -19,7 +19,9 @@ export const API_KEY = 'ba1ee33a82534e97b9af8da2d5740802';
 
 export const USER_ID = '139149536@N02';
 
-export const ALBUM_SIZE = FLICKR_SIZES.SMALL;
+export const THUBMS_SIZE = FLICKR_SIZES.MEDIUM;
+
+export const ORIGIN_SIZE = FLICKR_SIZES.ORIGIN;
 
 export const FLICKR_API_BASE_URL = "https://api.flickr.com/services/rest/";
 

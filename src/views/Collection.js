@@ -2,115 +2,93 @@ import React from 'react'
 import Lightbox from 'react-images'
 import Grid from '../components/Grid'
 import PreLoader from '../components/PreLoader'
-import { getAlbumInfo } from '../utils/flickrApiHelper'
+import { saveAlbums } from '../reducers/actions'
+import { getAlbumFull } from '../utils/flickrApiHelper'
 import { connect } from 'react-redux'
-import { ALBUM_SIZE } from '../utils/constants'
+import { bindActionCreators } from 'redux'
+import { THUBMS_SIZE } from '../utils/constants'
 
 require('../styles/collection.css')
 
 class Collection extends React.Component {
-	componentWillMount() {
-		console.log('component will mount');
-		const collection = this.props.collections.filter(item => item.id === this.props.id)[0];
-		
-		this.setState({
-			collection,
-			albums: []
-		})
+	componentDidMount() {
+		const collection = this.props.collections
+			.filter(item => item.id === this.props.id)[0];
+		const albums = collection.set;
 
-		const photosets = collection.set;
-		photosets.map((item, index) => {
-			getAlbumInfo(item.id, responceJson => this.getAlbumFull(responceJson, item))
+		albums.map((item, index) => {
+			getAlbumFull(item.id, responce => this.getAlbumFullCallback(responce, item))
 		})
-  	} 
+  	}
 
 	render() {
-		console.log('render')
-		console.log(this.state)
-		const { loading, albums, collection } = this.state;
-		const { title } = this.props.params;
-
-		if (loading) {
-			return ( <h2>Загрузка...</h2> )
-		}
-
+		const { albums } = this.props;
+		const collection = this.props.collections
+			.filter(item => item.id === this.props.id)[0];
+		const imagesArray = albums.map(item => {
+			const randomPhoto = item.photos[getRandom(item.photos.length)];
+			return {
+				id: item.id,
+				src: randomPhoto[THUBMS_SIZE]
+			}
+		})
 		return (
-				<div className="gallery">
+				<div className="collection">
 					<div style={{width: '80%', margin: '60px 10px'}}>
-						{ collection && collection.description }
-					</div>	
-					<Grid imagesArray={ albums }
-						  onClick={ () => this.openLightbox() } 
-						  columns={ 3 } 
-						  padding={ 3 } />
-					{/*<Lightbox
-						images={ images }
-						isOpen={ lightboxIsOpen }
-						onClickPrev={ () => this.gotoPrevious() }
-						onClickNext={ () => this.gotoNext() }
-						onClose={ () => this.closeLightbox() }
-						currentImage={ currentImage }
-					/>*/}
+						<p>{ collection && collection.description }</p>
+					</div>
+					<Grid 	imagesArray={ imagesArray }
+							isPhotos={ false }
+							columns={ 3 }
+							padding={ 3 } />
 				</div>
 			)
 	}
 
-	getAlbumFull (responce, album) {
+	getAlbumFullCallback (responce, album) {
+		const { albums, saveAlbums } = this.props;
+
 		const photos = responce.photoset && responce.photoset.photo;
 		if (photos) {
 			let randomPhoto = photos[getRandom(photos.length)];
 			const albumFull = {
 				id: album.id,
 				title: album.title,
-				src: randomPhoto[ALBUM_SIZE],
+				photos,
 				description: album.description
 			};
 
-			let albums = this.state.albums;
-			albums.push(albumFull);
-			this.setState({ albums });
+			const albumsFull = Object.assign([], albums);
+			albumsFull.push(albumFull);
+			saveAlbums(albumsFull);
 		}
-	}
-
-	gotoPrevious() {
-		this.setState({
-			currentImage: this.state.currentImage - 1
-		})
-	}
-
-	gotoNext() {
-		this.setState({
-			currentImage: this.state.currentImage + 1
-		})
-	}
-
-	openLightbox(index) {
-		this.setState({
-			lightboxIsOpen: true,
-			currentImage: index
-		})
-
-	}
-
-	closeLightbox() {
-		this.setState({
-			lightboxIsOpen: false
-		})
-	}
-}
-
-const mapStateToProps = (state, ownProps) => {
-	return {
-		collections: state.collections,
-		id: ownProps.routeParams.id
 	}
 }
 
 const getRandom = (length) => Math.floor(Math.random() * length)
 
+const mapStateToProps = (state, ownProps) => {
+	return {
+		collections: state.collections,
+		id: ownProps.routeParams.id,
+		albums: state.albums
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		saveAlbums: bindActionCreators(saveAlbums, dispatch)
+	}
+}
+
 Collection.propTypes = {
 	collections: React.PropTypes.array.isRequired,
-	id: React.PropTypes.string.isRequired
+	id: React.PropTypes.string.isRequired,
+	albums: React.PropTypes.array.isRequired
 };
 
-export default connect(mapStateToProps)(Collection);
+Collection.defaultProps = {
+  albums: []
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Collection);

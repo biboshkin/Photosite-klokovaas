@@ -1,16 +1,16 @@
-.gallery {
+.collection {
 	width: 100%;
 
 }
 @media (min-width: 768px) {
-	.gallery {
+	.collection {
 		width: 75%; 
 		height: 100%; 
 		float: right;
 	}
 }
 
-.gallery-text {
+.collection-text {
   font-size: 20px;
 }
 

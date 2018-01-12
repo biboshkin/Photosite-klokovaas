@@ -11,6 +11,7 @@ import MobileNav from './components/MobileNav'
 import Home from './views/Home'
 import Contact from './views/Contact'
 import Collection from './views/Collection'
+import Album from './views/Album'
 
 
 let history = createHashHistory({
@@ -48,7 +49,7 @@ render((
         <IndexRoute component={ Home } />
         <Route path="contact" component={ Contact } />
         <Route path="collections/:id" component={ Collection } />
-        <Route path="collections/albums/:id" component={ Collection } />
+        <Route path="collections/albums/:id" component={ Album } />
       </Route>
     </Router>
   </Provider>

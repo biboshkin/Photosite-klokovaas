@@ -1,5 +1,3 @@
-export const SELECT_COLLECTION = 'SELECT_COLLECTION';
+export const SAVE_ALBUMS = 'SAVE_ALBUMS';
 
 export const INIT_COLLECTIONS = 'INIT_COLLECTIONS';
-
-export const SELECT_SET = 'SELECT_SET';

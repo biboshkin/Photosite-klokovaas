@@ -5,7 +5,8 @@ import {
     FLICKR_RESPONCE_FORMAT,
     FLICKR_API_BASE_URL,
     NO_JSON_CALLBACK,
-    ALBUM_SIZE
+    THUBMS_SIZE,
+    ORIGIN_SIZE
 } from './constants'
 
 export const getCollectionsTree = (callback) => {
@@ -20,13 +21,13 @@ export const getCollectionsTree = (callback) => {
     getFlickrResponce(url, callback);
 }
 
-export const getAlbumInfo = (albumId, callback) => {
+export const getAlbumFull = (albumId, callback) => {
     let url = FLICKR_API_BASE_URL.concat(
         "?method=", FLICKR_METHODS.GET_PHOTOS,
         "&api_key=", API_KEY,
         "&photoset_id=", albumId,
         "&user_id=", USER_ID,
-        "&extras=", ALBUM_SIZE,
+        "&extras=", THUBMS_SIZE, ", ", ORIGIN_SIZE,
         "&nojsoncallback=", NO_JSON_CALLBACK,
         "&format=", FLICKR_RESPONCE_FORMAT
     )
