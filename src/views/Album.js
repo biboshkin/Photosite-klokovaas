@@ -37,17 +37,20 @@ class Album extends React.Component {
 		return (
 				<div className="collection">
 					<Grid imagesArray={ gridImages }
-						  onClick={ () => this.openLightbox } 
+						  onClick={ (index) => this.openLightbox(index) } 
 						  columns={ 3 }
 						  isPhotos={ true }
 						  padding={ 3 } />
                     <Lightbox
 						images={ images }
 						isOpen={ lightboxIsOpen }
+						backdropClosesModal={ true }						
+						preloadNextImage={ true }
 						onClickPrev={ () => this.gotoPrevious() }
 						onClickNext={ () => this.gotoNext() }
 						onClose={ () => this.closeLightbox() }
 						currentImage={ currentImage }
+						width={ 1200 }
 					/>
 				</div>
 			)
@@ -66,7 +69,6 @@ class Album extends React.Component {
 	}
 
 	openLightbox(index) {
-		debugger
 		this.setState({
 			lightboxIsOpen: true,
 			currentImage: index

@@ -13,8 +13,9 @@ class Grid extends React.Component {
       if (isPhotos) {
         return (
           <GridImage key={ index } 
-                     src={ arr.src } 
-                     width={ width } 
+                     src={ arr.src }
+                     onClick={ () => onClick(index) }
+                     width={ width }
                      padding={ padding }/>
         )
       }
