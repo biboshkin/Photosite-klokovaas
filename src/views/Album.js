@@ -50,6 +50,7 @@ class Album extends React.Component {
 						onClickNext={ () => this.gotoNext() }
 						onClose={ () => this.closeLightbox() }
 						currentImage={ currentImage }
+						spinner={ PreLoader }
 						width={ 1200 }
 					/>
 				</div>

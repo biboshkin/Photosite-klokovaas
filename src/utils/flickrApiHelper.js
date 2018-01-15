@@ -9,7 +9,7 @@ import {
     ORIGIN_SIZE
 } from './constants'
 
-export const getCollectionsTree = (callback) => {
+export const getCollectionsTree = (callback, onError) => {
     let url = FLICKR_API_BASE_URL.concat(
         "?method=", FLICKR_METHODS.GET_COLLECTIONS_TREE,
         "&api_key=", API_KEY,
@@ -18,7 +18,7 @@ export const getCollectionsTree = (callback) => {
         "&format=", FLICKR_RESPONCE_FORMAT
     )
 
-    getFlickrResponce(url, callback);
+    getFlickrResponce(url, callback, onError);
 }
 
 export const getAlbumFull = (albumId, callback) => {
@@ -35,7 +35,7 @@ export const getAlbumFull = (albumId, callback) => {
     getFlickrResponce(url, callback)
 }
 
-const getFlickrResponce = (url, callback) => {
+const getFlickrResponce = (url, callback, onError) => {
     //console.log('url: ' + url)
     fetch(url)
         .then(checkStatus)
@@ -46,6 +46,9 @@ const getFlickrResponce = (url, callback) => {
                 callback(data);
             };
         }).catch(function(error) {
+            if (onError) {
+                onError(error);
+            }
             console.error('Request failed.', error);
         })
 }

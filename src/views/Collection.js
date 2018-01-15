@@ -2,7 +2,7 @@ import React from 'react'
 import Lightbox from 'react-images'
 import Grid from '../components/Grid'
 import PreLoader from '../components/PreLoader'
-import { saveAlbums } from '../reducers/actions'
+import { addAlbumFull } from '../reducers/actions'
 import { getAlbumFull } from '../utils/flickrApiHelper'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -46,7 +46,7 @@ class Collection extends React.Component {
 	}
 
 	getAlbumFullCallback (responce, album) {
-		const { albums, saveAlbums } = this.props;
+		const { albums, addAlbumFull } = this.props;
 
 		const photos = responce.photoset && responce.photoset.photo;
 		if (photos) {
@@ -58,9 +58,7 @@ class Collection extends React.Component {
 				description: album.description
 			};
 
-			const albumsFull = Object.assign([], albums);
-			albumsFull.push(albumFull);
-			saveAlbums(albumsFull);
+			addAlbumFull(albumFull);
 		}
 	}
 }
@@ -77,7 +75,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		saveAlbums: bindActionCreators(saveAlbums, dispatch)
+		addAlbumFull: bindActionCreators(addAlbumFull, dispatch)
 	}
 }
 

@@ -1,5 +1,8 @@
-import React from "react";
+import React from "react"
 import Blazy from 'blazy'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { openLightbox } from '../reducers/actions'
 
 export default class GridImage extends React.Component {
 
@@ -14,7 +17,7 @@ export default class GridImage extends React.Component {
   }
 
   render() {
-    const { src, onClick, width, padding } = this.props;
+    const { src, width, padding, onClick } = this.props;
     const link = this.props.link || src;
 
     const styles = {
@@ -36,8 +39,8 @@ export default class GridImage extends React.Component {
     }
 
     return (
-      <div onClick={onClick} className="imageGridItem" style={styles.imageGridItem}>
-          <div data-src={src} className="imageWrapper b-lazy" style={styles.imageWrapper}></div>
+      <div onClick={ onClick } className="imageGridItem" style={ styles.imageGridItem }>
+          <div data-src={ src } className="imageWrapper b-lazy" style={ styles.imageWrapper }></div>
       </div>
     );
   }

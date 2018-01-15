@@ -1,9 +1,11 @@
-import { SAVE_ALBUMS, INIT_COLLECTIONS } from './constants'
+import { ADD_ALBUM,
+         INIT_COLLECTIONS
+} from './constants'
 
-export const saveAlbums = ( albums ) => {
+export const addAlbumFull = ( albumFull ) => {
     return {
-        type: SAVE_ALBUMS,
-        value: albums
+        type: ADD_ALBUM,
+        value: albumFull
     }
 }
 

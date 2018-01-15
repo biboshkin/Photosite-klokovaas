@@ -4,14 +4,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getCollectionsTree } from '../utils/flickrApiHelper'
 import { initCollections } from '../reducers/actions'
+import { showLoader, hideLoader } from '../utils/loader'
 
 require('../styles/menu.css');
 
 class Menu extends React.Component {
 	componentDidMount() {
-		getCollectionsTree((responce) => responce.collections && 
-										 responce.collections.collection && 
-										 this.props.initCollections(responce.collections.collection))
+		if (this.props.collections && this.props.collections.length == 0) {
+			getCollectionsTree(
+				(responce) => this.getCollectionsSuccess(responce), 
+				() => this.getCollectionsError()
+			)
+		}
 	}
 
 	render() {
@@ -60,6 +64,17 @@ class Menu extends React.Component {
 				</div>
 			</div>	
 		)
+	}
+
+	getCollectionsSuccess(responce) {
+		if (responce.collections && responce.collections.collection) {
+			this.props.initCollections(responce.collections.collection)
+		}
+		hideLoader();
+	}
+
+	getCollectionsError() {
+		hideLoader();
 	}
 }
 

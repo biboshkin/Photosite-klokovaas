@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getCollectionsTree } from '../utils/flickrApiHelper'
 import { initCollections } from '../reducers/actions'
+import { showLoader, hideLoader } from '../utils/loader'
 require('../styles/mobilemenu.css')
 
 let isNavOpen = false;
@@ -18,19 +19,22 @@ class MobileNav extends React.Component {
 	}
 
 	componentDidMount() {
-		getCollectionsTree((responce) => responce.collections && 
-										 responce.collections.collection && 
-										 this.props.initCollections(responce.collections.collection))
+		if (this.props.collections && this.props.collections.length == 0) {
+			getCollectionsTree(
+				(responce) => this.getCollectionsSuccess(responce), 
+				() => this.getCollectionsError()
+			)
+		}
 	}
 
 	render() {
 		const { collections } = this.props;
 		return (
-			<nav className="mobile-nav">
+			<nav className="mobile-nav"  
+				 onClick={ this.toogleNav } >
 				<div id="menuToggle">
 					<input type="checkbox" 
-						   checked={ this.state.isNavOpen } 
-						   onClick={ this.toogleNav }/>
+						   checked={ this.state.isNavOpen }/>
 					<span></span>
 					<span></span>
 					<span></span>
@@ -49,14 +53,13 @@ class MobileNav extends React.Component {
 									<p>
 										<Link key={ index }
 											  className="mobile-tabs"
-											  onClick={ this.toogleNav }
 											  to={ `collections/${item.id}` }>
 											  { item.title }
 										</Link>
 									</p>
 								)
 							}
-							<p className="mobile-tabs" onClick={ this.toogleNav }>
+							<p className="mobile-tabs">
 								<Link to="contact">Контакты</Link>
 							</p>
 						</li>
@@ -88,6 +91,17 @@ class MobileNav extends React.Component {
 		this.setState({
 			isNavOpen: isOpen ? false : true
 		})
+	}
+
+	getCollectionsSuccess(responce) {
+		if (responce.collections && responce.collections.collection) {
+			this.props.initCollections(responce.collections.collection)
+		}
+		hideLoader();
+	}
+
+	getCollectionsError() {
+		hideLoader();
 	}
 }
 

@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { createHistory } from 'history'
-import createHashHistory from 'history/lib/createHashHistory'
+import createHashHistory from 'history/createHashHistory'
 import configureStore from './reducers/configureStore'
 import RouteTransition from './components/RouteTransition'
 import Menu from './components/Menu'
@@ -12,7 +12,6 @@ import Home from './views/Home'
 import Contact from './views/Contact'
 import Collection from './views/Collection'
 import Album from './views/Album'
-
 
 let history = createHashHistory({
   queryKey: false
@@ -24,8 +23,8 @@ class App extends React.Component {
 
   componentDidMount() {
     // setTimeout(() =>{
-      document.getElementById("app").className = "show";
-      document.getElementById("loader").className = "delete";
+    //  document.getElementById("app").className = "show";
+    //  document.getElementById("loader").className = "delete";
     // }, 3000);
   }
 

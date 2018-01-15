@@ -1,3 +1,3 @@
-export const SAVE_ALBUMS = 'SAVE_ALBUMS';
+export const ADD_ALBUM = 'ADD_ALBUM';
 
 export const INIT_COLLECTIONS = 'INIT_COLLECTIONS';
