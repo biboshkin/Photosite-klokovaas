@@ -36,12 +36,10 @@ export const getAlbumFull = (albumId, callback) => {
 }
 
 const getFlickrResponce = (url, callback, onError) => {
-    //console.log('url: ' + url)
     fetch(url)
         .then(checkStatus)
         .then(parseJSON)
         .then(function(data) {
-            console.info('Request succeeded with JSON response', data);
             if (callback) {
                 callback(data);
             };

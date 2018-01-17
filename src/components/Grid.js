@@ -7,8 +7,7 @@ class Grid extends React.Component {
   render() {
     const { imagesArray, padding, onClick, isPhotos } = this.props;
     const columns = this.props.columns || 3;
-    const width = Math.floor(100 / columns);    
-    console.log(imagesArray)
+    const width = Math.floor(100 / columns);
     const imageNodes = imagesArray.map((arr, index) => {
       if (isPhotos) {
         return (

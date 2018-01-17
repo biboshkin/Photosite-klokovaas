@@ -50,9 +50,8 @@ class MobileNav extends React.Component {
 							{
 								collections && 
 								collections.map((item, index) =>
-									<p>
-										<Link key={ index }
-											  className="mobile-tabs"
+									<p key={ index }>
+										<Link className="mobile-tabs"
 											  to={ `collections/${item.id}` }>
 											  { item.title }
 										</Link>
