@@ -1,9 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import { Provider } from 'react-redux'
-import { createHistory } from 'history'
-import createHashHistory from 'history/createHashHistory'
 import configureStore from './reducers/configureStore'
 import RouteTransition from './components/RouteTransition'
 import Menu from './components/Menu'
@@ -12,10 +10,6 @@ import Home from './views/Home'
 import Contact from './views/Contact'
 import Collection from './views/Collection'
 import Album from './views/Album'
-
-let history = createHashHistory({
-  queryKey: false
-});
 
 const store = configureStore();
 
@@ -43,7 +37,7 @@ class App extends React.Component {
 
 render((
   <Provider store={ store }>
-    <Router onUpdate={() => window.scrollTo(0, 0)} history={ browserHistory }>
+    <Router onUpdate={() => window.scrollTo(0, 0)} history={ hashHistory }>
       <Route path="/" component={ App }>
         <IndexRoute component={ Home } />
         <Route path="contact" component={ Contact } />

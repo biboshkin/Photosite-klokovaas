@@ -22,6 +22,8 @@ class Album extends React.Component {
 	render() {
 		const { album, lightboxIsOpen, currentImage } = this.state;
 		const photos = album.photos || [];
+		const height = Math.round(window.innerHeight * 0.9);
+		const width = Math.round(window.innerWidth * 0.9);
 		const gridImages = photos.map(item => {
 			return {
 				src: item[THUBMS_SIZE]
@@ -29,10 +31,10 @@ class Album extends React.Component {
 		});
 		const images = photos.map(item => {
 			return {
-				src: item[ORIGIN_SIZE],
-				caption: item.title
+				src: item[ORIGIN_SIZE]
 			}
 		});
+		console.log(images)
 
 		return (
 				<div className="collection">
@@ -43,18 +45,18 @@ class Album extends React.Component {
 						  padding={ 3 } />
                     <Lightbox
 						images={ images }
-						isOpen={ lightboxIsOpen }
-						backdropClosesModal={ true }						
+						isOpen={ lightboxIsOpen }					
 						preloadNextImage={ true }
 						onClickPrev={ () => this.gotoPrevious() }
 						onClickNext={ () => this.gotoNext() }
 						onClose={ () => this.closeLightbox() }
 						currentImage={ currentImage }
-						spinner={ PreLoader }
-						width={ 1200 }
+						width={ width }
+						height={ height }
+						imageCountSeparator={ " из " }
 					/>
 				</div>
-			)
+		)
 	}
 
 	gotoPrevious() {

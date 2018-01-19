@@ -1,3 +1,4 @@
+import 'whatwg-fetch'
 import {
     FLICKR_METHODS,
     API_KEY,
