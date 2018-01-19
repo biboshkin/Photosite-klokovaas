@@ -7,7 +7,7 @@ import { getAlbumInfo } from '../utils/flickrApiHelper'
 import { THUBMS_SIZE, ORIGIN_SIZE } from '../utils/constants'
 import { setCollection } from '../reducers/actions'
 
-require('../styles/collection.css')
+require('../styles/album.css')
 
 class Album extends React.Component {
 	constructor(props) {

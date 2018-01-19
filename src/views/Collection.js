@@ -33,16 +33,13 @@ class Collection extends React.Component {
 			}
 		})
 		return (
-				<div className="collection">
-					<div style={{width: '80%', margin: '60px 10px'}}>
-						<p>{ collection && collection.description }</p>
-					</div>
-					<Grid 	imagesArray={ imagesArray }
-							isPhotos={ false }
-							columns={ 3 }
-							padding={ 3 } />
-				</div>
-			)
+			<div className="collection">
+				<Grid 	imagesArray={ imagesArray }
+						isPhotos={ false }
+						columns={ 3 }
+						padding={ 3 } />
+			</div>
+		)
 	}
 
 	getAlbumFullCallback (responce, album) {
