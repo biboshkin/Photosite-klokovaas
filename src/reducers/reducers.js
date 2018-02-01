@@ -1,17 +1,12 @@
 import { ADD_ALBUM, 
-         INIT_COLLECTIONS
+         INIT_COLLECTIONS,
+         INITIAL_STATE
 } from './constants'
 
 import uniqWith from 'lodash/uniqWith'
 import isEqual from 'lodash/isEqual'
 
-const initialState = {
-    collections: [],
-    albums: [],
-    lightboxIsOpen: false
-}
-
-export const mainReducer = (state = initialState, action) => {
+export const mainReducer = (state = INITIAL_STATE, action) => {
     let result;
     switch (action.type) {
         case ADD_ALBUM:

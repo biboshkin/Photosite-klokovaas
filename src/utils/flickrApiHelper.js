@@ -11,6 +11,7 @@ import {
 } from './constants'
 
 export const getCollectionsTree = (callback, onError) => {
+    //console.log('get colections tree')
     let url = FLICKR_API_BASE_URL.concat(
         "?method=", FLICKR_METHODS.GET_COLLECTIONS_TREE,
         "&api_key=", API_KEY,
@@ -37,14 +38,17 @@ export const getAlbumFull = (albumId, callback) => {
 }
 
 const getFlickrResponce = (url, callback, onError) => {
+    console.log('start flickr post')
     fetch(url)
         .then(checkStatus)
         .then(parseJSON)
         .then(function(data) {
+            console.log('success callback')
             if (callback) {
                 callback(data);
             };
         }).catch(function(error) {
+            console.log('error callback')
             if (onError) {
                 onError(error);
             }

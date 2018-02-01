@@ -1,11 +1,14 @@
 import { createStore } from 'redux'
 import { mainReducer } from './reducers'
+import { INITIAL_STATE } from './constants'
 
-export default function configureStore(initialState) {
+const isChrome = !!window.chrome && !!window.chrome.webstore;
+
+export default function configureStore() {
     const store = createStore(
         mainReducer,
-        initialState        
-        +  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ); 
+        INITIAL_STATE
+    )
 
     if (module.hot) {
         module.hot.accept('./reducers', () => {

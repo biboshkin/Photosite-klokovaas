@@ -5,12 +5,15 @@ import { bindActionCreators } from 'redux'
 import { getCollectionsTree } from '../utils/flickrApiHelper'
 import { initCollections } from '../reducers/actions'
 import { showLoader, hideLoader } from '../utils/loader'
+import * as _ from 'lodash'
 
 require('../styles/menu.css');
 
 class Menu extends React.Component {
 	componentDidMount() {
-		if (this.props.collections && this.props.collections.length == 0) {
+		let { collections } = this.props;
+		
+		if (_.isEmpty(collections)) {
 			getCollectionsTree(
 				(responce) => this.getCollectionsSuccess(responce), 
 				() => this.getCollectionsError()

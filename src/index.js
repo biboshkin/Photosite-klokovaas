@@ -1,4 +1,5 @@
 import React from 'react'
+import 'babel-polyfill'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import { Provider } from 'react-redux'
@@ -11,17 +12,7 @@ import Contact from './views/Contact'
 import Collection from './views/Collection'
 import Album from './views/Album'
 
-const store = configureStore();
-
 class App extends React.Component {
-
-  componentDidMount() {
-    // setTimeout(() =>{
-    //  document.getElementById("app").className = "show";
-    //  document.getElementById("loader").className = "delete";
-    // }, 3000);
-  }
-
   render() {
     return (
       <div style={{height: '100%', width: '100%'}}>
@@ -36,7 +27,7 @@ class App extends React.Component {
 }
 
 render((
-  <Provider store={ store }>
+  <Provider store={ configureStore() }>
     <Router onUpdate={() => window.scrollTo(0, 0)} history={ hashHistory }>
       <Route path="/" component={ App }>
         <IndexRoute component={ Home } />
