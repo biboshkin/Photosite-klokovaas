@@ -3,23 +3,22 @@ import { ADD_ALBUM,
          INITIAL_STATE
 } from './constants'
 
-import uniqWith from 'lodash/uniqWith'
-import isEqual from 'lodash/isEqual'
+import * as _ from 'lodash'
 
 export const mainReducer = (state = INITIAL_STATE, action) => {
     let result;
     switch (action.type) {
         case ADD_ALBUM:
-            result = Object.assign({}, state);
+            result = _.assign({}, state);
             if (result.albums && result.albums.length == 0) {
                 result.albums.push(action.value);
             } else {
                 result.albums.push(action.value);
-                result.albums = uniqWith(result.albums, isEqual);
+                result.albums = _.uniqWith(result.albums, _.isEqual);
             }
             return result;
         case INIT_COLLECTIONS:
-            result = Object.assign({}, state);
+            result = _.assign({}, state);
             result.collections = action.value;
             return result;
         default: 
